@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const dataInventor = require('../data/inventor');
+const dataInventor = require('../data/inventordb');
 
 // dado un json de inventores
 // 1.- un endpoint que retorne todos los iventores
@@ -36,6 +36,12 @@ router.put('/:id', async (req, res)=>{
     inventor._id = id;
     inventor = await dataInventor.updateInventor(inventor);
     res.json(inventor);
+});
+
+router.delete('/:id', async(req, res) =>{
+    let id = req.params.id;
+    await dataInventor.deleteInventor(id);
+    res.send('Inventor eliminado') ;
 });
 
 module.exports = router;
